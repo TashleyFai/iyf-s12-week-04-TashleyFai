@@ -31,7 +31,7 @@ console.log("After increment:", counter);
 counter--;
 console.log("After decrement:", counter);
 
-const firstName = "Faith";
+const firstName = "Faith";               
 const greeting = `Hello, ${firstName}!`;
 console.log(greeting);
 console.log(firstName.toUpperCase());
@@ -312,4 +312,26 @@ try {
     JSON.parse("This is not JSON");
 } catch (error) {
     console.log("Caught invalid JSON:", error.message);
+}
+
+// EXTRA PRACTICE: AGE AND LOOPS
+
+const ageInDays = myAge * 365;
+const ageInHours = ageInDays * 24;
+const yearTurning100 = today.getFullYear() + (100 - myAge);
+
+console.log("Approximate age in days:", ageInDays);
+console.log("Approximate age in hours:", ageInHours);
+console.log("Year I will turn 100:", yearTurning100);
+
+// Print numbers from 1 to 100
+for (let number = 1; number <= 100; number++) {
+    console.log(number);
+}
+
+// Print even numbers from 1 to 50
+for (let number = 1; number <= 50; number++) {
+    if (number % 2 === 0) {
+        console.log(number);
+    }
 }
