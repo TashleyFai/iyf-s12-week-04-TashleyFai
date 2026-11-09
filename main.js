@@ -2,6 +2,7 @@
 // Lessons 7 and 8 Practice
 
 // TASK 7.1: VARIABLES
+
 const myName = "Faith";
 let myAge = 23;
 const isStudent = true;
@@ -15,6 +16,7 @@ console.log("Favorite colors:", favoriteColors);
 console.log("Today's date:", today);
 
 // TASK 7.2: OPERATORS
+
 const numberOne = 20;
 const numberTwo = 5;
 
@@ -27,20 +29,27 @@ console.log("Power:", numberOne ** numberTwo);
 
 let counter = 0;
 counter++;
-console.log("After increment:", counter);
+console.log("Increment:", counter);
 counter--;
-console.log("After decrement:", counter);
+console.log("Decrement:", counter);
 
-const firstName = "Faith";               
-const greeting = `Hello, ${firstName}!`;
-console.log(greeting);
-console.log(firstName.toUpperCase());
-console.log(firstName.toLowerCase());
-console.log(firstName.charAt(0));
-console.log(firstName.includes("a"));
+const firstName = "Faith";
+const lastName = "Kiptoo";
+const fullName = firstName + " " + lastName;
 
-console.log("Is 10 equal to 10?", 10 === 10);
-console.log("Is 10 greater than 5?", 10 > 5);
+console.log("Full name:", fullName);
+console.log(`Hello, ${firstName}!`);
+console.log(`${firstName} has ${firstName.length} letters.`);
+console.log("Uppercase:", firstName.toUpperCase());
+console.log("Lowercase:", firstName.toLowerCase());
+console.log("First letter:", firstName.charAt(0));
+console.log("Includes a:", firstName.includes("a"));
+
+console.log("Equal:", 10 === 10);
+console.log("Not equal:", 10 !== 5);
+console.log("Less than:", 5 < 10);
+console.log("Greater than:", 10 > 5);
+
 console.log("Logical AND:", true && false);
 console.log("Logical OR:", true || false);
 console.log("Logical NOT:", !true);
@@ -51,9 +60,11 @@ function greet(name) {
     return `Hello, ${name}!`;
 }
 
-const add = function (a, b) {
+const add = function(a, b) {
     return a + b;
 };
+
+const subtract = (a, b) => a - b;
 
 const multiply = (a, b) => a * b;
 
@@ -87,8 +98,8 @@ function reverseString(str) {
     return str.split("").reverse().join("");
 }
 
-function sayHello(name = "Friend") {
-    return `Hello, ${name}!`;
+function sayHello(name = "Friend", greetingText = "Hello") {
+    return `${greetingText}, ${name}!`;
 }
 
 function calculateTip(bill, tipPercent = 15) {
@@ -97,6 +108,7 @@ function calculateTip(bill, tipPercent = 15) {
 
 console.log(greet("Faith"));
 console.log("Addition function:", add(10, 5));
+console.log("Subtraction function:", subtract(10, 5));
 console.log("Multiplication function:", multiply(4, 3));
 console.log("Division function:", divide(10, 2));
 console.log("Area:", calculateArea(5, 4));
@@ -105,6 +117,7 @@ console.log("Is even:", isEven(8));
 console.log("Initials:", getInitials("Faith Kiptoo"));
 console.log("Reversed:", reverseString("JavaScript"));
 console.log(sayHello());
+console.log(sayHello("Faith", "Good morning"));
 console.log("Tip:", calculateTip(1000));
 
 // TASK 7.4: CONTROL FLOW
@@ -119,13 +132,13 @@ function getGrade(score) {
 
 function getDayName(dayNumber) {
     switch (dayNumber) {
+        case 0: return "Sunday";
         case 1: return "Monday";
         case 2: return "Tuesday";
         case 3: return "Wednesday";
         case 4: return "Thursday";
         case 5: return "Friday";
         case 6: return "Saturday";
-        case 7: return "Sunday";
         default: return "Invalid day";
     }
 }
@@ -138,15 +151,19 @@ for (let i = 1; i <= 10; i++) {
 }
 
 let count = 1;
+
 while (count <= 5) {
     console.log("While loop:", count);
     count++;
 }
 
 const colors = ["Blue", "Black", "White"];
+
 for (const color of colors) {
     console.log("Color:", color);
 }
+
+// FizzBuzz from 1 to 100
 
 for (let i = 1; i <= 100; i++) {
     if (i % 3 === 0 && i % 5 === 0) {
@@ -160,37 +177,20 @@ for (let i = 1; i <= 100; i++) {
     }
 }
 
+// Triangle pattern
+
 for (let i = 1; i <= 5; i++) {
     console.log("*".repeat(i));
 }
 
 // TASK 7.5: CALCULATOR
 
-function calculatorAdd(a, b) {
-    return a + b;
-}
-
-function calculatorSubtract(a, b) {
-    return a - b;
-}
-
-function calculatorMultiply(a, b) {
-    return a * b;
-}
-
-function calculatorDivide(a, b) {
-    if (b === 0) {
-        return "Error: Cannot divide by zero";
-    }
-    return a / b;
-}
-
 function calculate(num1, operator, num2) {
     switch (operator) {
-        case "+": return calculatorAdd(num1, num2);
-        case "-": return calculatorSubtract(num1, num2);
-        case "*": return calculatorMultiply(num1, num2);
-        case "/": return calculatorDivide(num1, num2);
+        case "+": return add(num1, num2);
+        case "-": return subtract(num1, num2);
+        case "*": return multiply(num1, num2);
+        case "/": return divide(num1, num2);
         case "%": return num1 % num2;
         case "**": return num1 ** num2;
         default: return "Invalid operator";
@@ -208,6 +208,12 @@ console.log("Division by zero:", calculate(10, "/", 0));
 // TASK 8.1: ARRAYS
 
 const fruits = ["Mango", "Banana", "Orange"];
+const mixed = ["Hello", 25, true, null];
+
+console.log("First fruit:", fruits[0]);
+console.log("Number of fruits:", fruits.length);
+console.log("Mixed array:", mixed);
+
 fruits.push("Apple");
 fruits.unshift("Pineapple");
 fruits.pop();
@@ -222,7 +228,9 @@ const numbers = [2, 5, 8, 12, 15, -3];
 const doubledNumbers = numbers.map(number => number * 2);
 const positiveNumbers = numbers.filter(number => number >= 0);
 const firstLargeNumber = numbers.find(number => number > 10);
-const productOfNumbers = numbers.reduce((total, number) => total * number, 1);
+const productOfNumbers = numbers.reduce(
+    (total, number) => total * number, 1
+);
 
 console.log("Doubled:", doubledNumbers);
 console.log("Positive numbers:", positiveNumbers);
@@ -233,31 +241,65 @@ console.log("Includes 8:", numbers.includes(8));
 // TASK 8.2: OBJECTS
 
 const person = {
-    name: "Faith",
+    firstName: "Faith",
+    lastName: "Kiptoo",
     age: 23,
     isStudent: true,
+    hobbies: ["Coding", "Reading"],
     address: {
         city: "Nairobi",
         country: "Kenya"
     },
+
     introduce() {
-        return `My name is ${this.name} and I am ${this.age} years old.`;
+        return `My name is ${this.firstName} ${this.lastName}.`;
     }
 };
 
 console.log("Person:", person);
+console.log("First name:", person.firstName);
+console.log("Last name:", person["lastName"]);
 console.log("City:", person.address.city);
 console.log(person.introduce());
 
-person.favoriteFood = "Rice";
+person.age = 24;
+person.phone = "0700000000";
 delete person.isStudent;
 
-console.log("Keys:", Object.keys(person));
-console.log("Values:", Object.values(person));
-console.log("Entries:", Object.entries(person));
+console.log("Updated person:", person);
 
-for (const key in person) {
-    console.log(key, person[key]);
+// Calculator object
+
+const calculator = {
+    add: function(a, b) {
+        return a + b;
+    },
+
+    subtract(a, b) {
+        return a - b;
+    },
+
+    multiply: (a, b) => a * b
+};
+
+console.log("Object addition:", calculator.add(10, 5));
+console.log("Object subtraction:", calculator.subtract(10, 5));
+console.log("Object multiplication:", calculator.multiply(10, 5));
+
+// Scores object
+
+const scores = {
+    Alice: 90,
+    Bob: 75,
+    Charlie: 60
+};
+
+console.log("Score keys:", Object.keys(scores));
+console.log("Score values:", Object.values(scores));
+console.log("Score entries:", Object.entries(scores));
+
+for (const [name, score] of Object.entries(scores)) {
+    console.log(`${name} scored ${score}`);
 }
 
 // TASK 8.3: ARRAYS OF OBJECTS
@@ -271,9 +313,19 @@ const students = [
 const studentNames = students.map(student => student.name);
 const highGrades = students.filter(student => student.grade > 80);
 const foundStudent = students.find(student => student.name === "Brian");
-const averageGrade = students.reduce((total, student) => total + student.grade, 0) / students.length;
-const computerScienceStudents = students.filter(student => student.major === "Computer Science");
-const sortedStudents = [...students].sort((a, b) => b.grade - a.grade);
+
+const averageGrade = students.reduce(
+    (total, student) => total + student.grade, 0
+) / students.length;
+
+const computerScienceStudents = students.filter(
+    student => student.major === "Computer Science"
+);
+
+const sortedStudents = [...students].sort(
+    (a, b) => b.grade - a.grade
+);
+
 const hasExcellentStudent = students.some(student => student.grade > 90);
 const allPassing = students.every(student => student.grade >= 60);
 
@@ -288,6 +340,19 @@ console.log("All passing:", allPassing);
 
 // TASK 8.4: JSON
 
+const studentJSON = '{"name":"Faith","grades":{"math":88,"english":92}}';
+
+const parsedStudent = JSON.parse(studentJSON);
+
+console.log("Parsed student:", parsedStudent);
+console.log("Student name:", parsedStudent.name);
+console.log("Math grade:", parsedStudent.grades.math);
+
+const studentString = JSON.stringify(parsedStudent, null, 2);
+
+console.log("JSON string:", studentString);
+console.log("Type of JSON string:", typeof studentString);
+
 const postsJSON = `[
     {"title":"Learning JavaScript","likes":20,"published":true},
     {"title":"My Coding Journey","likes":35,"published":false},
@@ -296,14 +361,24 @@ const postsJSON = `[
 
 try {
     const posts = JSON.parse(postsJSON);
-    const publishedPosts = posts.filter(post => post.published === true);
-    const popularPosts = [...publishedPosts].sort((a, b) => b.likes - a.likes);
-    const postTitles = popularPosts.map(post => post.title);
+
+    const publishedPosts = posts.filter(
+        post => post.published === true
+    );
+
+    const popularPosts = [...publishedPosts].sort(
+        (a, b) => b.likes - a.likes
+    );
+
+    const postDescriptions = popularPosts.map(
+        post => `${post.title} (${post.likes} likes)`
+    );
 
     console.log("Published posts:", publishedPosts);
     console.log("Popular posts:", popularPosts);
-    console.log("Post titles:", postTitles);
-    console.log("JSON string:", JSON.stringify(publishedPosts));
+    console.log("Post descriptions:", postDescriptions);
+    console.log("Filtered JSON:", JSON.stringify(publishedPosts, null, 2));
+
 } catch (error) {
     console.log("Invalid JSON:", error.message);
 }
@@ -325,11 +400,13 @@ console.log("Approximate age in hours:", ageInHours);
 console.log("Year I will turn 100:", yearTurning100);
 
 // Print numbers from 1 to 100
+
 for (let number = 1; number <= 100; number++) {
     console.log(number);
 }
 
 // Print even numbers from 1 to 50
+
 for (let number = 1; number <= 50; number++) {
     if (number % 2 === 0) {
         console.log(number);
