@@ -1,11 +1,8 @@
+```javascript
 // WEEK 4: STUDENT GRADE TRACKER
 
 const gradeTracker = {
-    students: [
-        { name: "Nia", grades: { math: 90, science: 95, english: 90 } },
-        { name: "Brian", grades: { math: 80, science: 75, english: 72 } },
-        { name: "Zuri", grades: { math: 57, science: 60, english: 55 } }
-    ],
+    students: [],
 
     addStudent(name, grades) {
         this.students.push({ name, grades });
@@ -21,6 +18,9 @@ const gradeTracker = {
         if (!student) return null;
 
         const grades = Object.values(student.grades);
+
+        if (grades.length === 0) return null;
+
         const total = grades.reduce((sum, grade) => sum + grade, 0);
 
         return Number((total / grades.length).toFixed(2));
@@ -42,10 +42,8 @@ const gradeTracker = {
         if (this.students.length === 0) return null;
 
         return this.students.reduce((top, student) => {
-            const studentAverage = this.getStudentAverage(student.name);
-            const topAverage = this.getStudentAverage(top.name);
-
-            return studentAverage > topAverage ? student : top;
+            return this.getStudentAverage(student.name) >
+                this.getStudentAverage(top.name) ? student : top;
         });
     },
 
@@ -69,19 +67,37 @@ const gradeTracker = {
         if (!student) return "Student not found";
 
         const average = this.getStudentAverage(name);
+        const letterGrade = this.getLetterGrade(average);
 
-        return {
-            name: student.name,
-            grades: student.grades,
-            average: average,
-            letterGrade: this.getLetterGrade(average)
-        };
+        const gradeDetails = Object.entries(student.grades)
+            .map(([subject, score]) => `${subject}: ${score}`)
+            .join(", ");
+
+        return `Report Card: ${student.name}\n${gradeDetails}\nAverage: ${average}\nLetter Grade: ${letterGrade}`;
     }
 };
 
 // TESTING THE GRADE TRACKER
 
-console.log("Nia's average:", gradeTracker.getStudentAverage("Nia"));
+gradeTracker.addStudent("Alice", {
+    math: 95,
+    english: 88,
+    science: 92
+});
+
+gradeTracker.addStudent("Bob", {
+    math: 72,
+    english: 85,
+    science: 78
+});
+
+gradeTracker.addStudent("Charlie", {
+    math: 60,
+    english: 65,
+    science: 58
+});
+
+console.log("Alice's average:", gradeTracker.getStudentAverage("Alice"));
 console.log("Math average:", gradeTracker.getSubjectAverage("math"));
 console.log("Top student:", gradeTracker.getTopStudent().name);
 
@@ -90,13 +106,7 @@ console.log(
     gradeTracker.getStrugglingStudents().map(student => student.name)
 );
 
-console.log("Nia's report card:", gradeTracker.generateReportCard("Nia"));
+console.log(gradeTracker.generateReportCard("Alice"));
 
-gradeTracker.addStudent("Kevin", {
-    math: 85,
-    science: 88,
-    english: 80
-});
-
-console.log("New student:", gradeTracker.getStudent("Kevin"));
 console.log("Grade for 85:", gradeTracker.getLetterGrade(85));
+```
